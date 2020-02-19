@@ -1,0 +1,5 @@
+Set Engine3D$Dir <Obey$Dir>
+Iconsprites <Engine3D$Dir>.!Sprites
+WimpSlot -min 16384k -max 16384k
+*RMEnsure Engine3D 1.0.0 *RMLOAD <Engine3D$Dir>.Engine3D
+*<Engine3D$Dir>.!RunImage %*0

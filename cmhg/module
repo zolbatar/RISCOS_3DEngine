@@ -1,0 +1,34 @@
+; Copyright (c) 2005-2007 GCCSDK Developers
+; Small boiler plate example how to write RISC OS module using GCCSDK.
+
+date-string:            09 Sep 2019
+
+title-string:           Engine3D
+
+help-string:            Engine3D 1.00 (c) 2019 Daryl Dudey
+
+initialisation-code:    module_init
+
+finalisation-code:      module_final
+
+swi-chunk-base-number:  0x81400
+swi-handler-code:       module_service
+swi-decoding-table:     Engine3D,
+                        Init Shutdown,
+                        SetClip ClearScreen FlipBanks,
+                        DrawPoint DrawLine,
+                        DrawTriangle DrawGouraudTriangle,
+                        PerformanceTest2D,
+                        SetRenderType,
+                        ObjectSize,ShapeSize,VertexSize,FaceSize,
+                        InitialiseObject,RenderObject,TransformObject,
+                        SetAmbientLight,SetDirectionalLight,
+                        SetNormalsVisibility,
+                        RenderFrame
+
+module-is-runnable:
+
+;command-keyword-table:  module_handler
+;                        perftest(help-text: "The 2D performance test", min-args: 0, max-args: 0),
+;                        cubetest(help-text: "A spinning 3D cub", min-args:0, max-args:0),
+;                        demo(help-text: "A demo of the 3D capability", min-args:0, max-args:0)

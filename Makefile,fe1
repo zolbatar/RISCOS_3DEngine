@@ -1,0 +1,26 @@
+CC          = gcc
+CCFLAGS     = -mmodule -O3 -Wall -std=gnu99 -mfpu=vfp -mfloat-abi=softfp -save-temps
+ASM         = $(CC)
+ASMFLAGS    = $(CCFLAGS)
+LINK        = gcc
+LINKFLAGS   = -mmodule -lm -mfpu=vfp -mfloat-abi=softfp
+CMHG        = cmunge
+CMHGFLAGS   = -tgcc -32bit
+
+OBJS = main.o module.o engine.o engine-draw.o engine-normals.o engine-process.o graphics.o graphics-barycentric.o graphics-clippedline.o graphics-filledtriangle.o test.o utils.o math.o
+
+engine3d: $(OBJS)
+	$(LINK) $(LINKFLAGS) $(OBJS) -o $@
+
+.SUFFIXES:
+.SUFFIXES: .c .o .h .cmhg .s
+
+.c.o:; $(CC)  $(CCFLAGS) -c -o $@ $<
+.s.o:; $(ASM) $(ASMFLAGS) -c -o $@ $<
+
+# CMunge invocation rule:
+.cmhg.h:;	$(CMHG) $(CMHGFLAGS) -d $@ $<
+.cmhg.s:;       $(CMHG) $(CMHGFLAGS) -s $@ $<
+
+# Dependencies:
+main.c: module.h module.s
